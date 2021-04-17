@@ -1,0 +1,57 @@
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content edge-drag-threshold="true">
+        <ion-nav-bar class="bar-custom">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left">
+        <ion-content class="sidemenu-content">
+            <div class="row sidemenu-header logo-image" ng-style="{'background-image':'url(' + loggedInUser.LogoImageURL + ')'}">
+            </div>
+            <ion-list>
+                <!-- faculty -->
+                <ion-item class="item-icon-left" menu-close href="#/dashboard" ng-if="loggedInUser.Role == 'FACULTY' || loggedInUser.Role == 'ADMIN'">
+                    <i class="icon custom ion-pie-graph"></i> Dashboard
+                </ion-item>
+                <ion-item class="item-icon-left" menu-close href="#/takeAttendance" ng-if="(loggedInUser.Role == 'FACULTY' || loggedInUser.Role == 'ADMIN') && (loggedInUser.Type != 'SCHOOL')">
+                    <i class="icon custom ion-checkmark-round"></i> Attendance
+                </ion-item>
+                <ion-item class="item-icon-left" menu-close href="#/assignments" ng-if="(loggedInUser.Role == 'FACULTY' || loggedInUser.Role == 'ADMIN') && (loggedInUser.IsB2C == 'false')">
+                    <i class="icon custom ion-android-share-alt"></i> Share to Class
+                </ion-item>
+                <!-- <ion-item class="item-icon-left" menu-close href="#/questions" ng-if="loggedInUser.PackageCode == 'SMART' && (loggedInUser.Role == 'FACULTY' || loggedInUser.Role == 'ADMIN')">
+                    <i class="icon custom ion-help-circled"></i> Generate Questions
+                </ion-item> -->
+                <ion-item class="item-icon-left" menu-close href="#/tests" ng-if="(loggedInUser.PackageCode != 'LM' && (loggedInUser.Role == 'FACULTY' || loggedInUser.Role == 'ADMIN') && (loggedInUser.IsB2C == 'false'))">
+                    <i class="icon custom ion-clipboard"></i> Assessment
+                </ion-item>
+                <ion-item class="item-icon-left" menu-close href="#/lessonPlan" ng-if="loggedInUser.PackageCode != 'BASIC' && (loggedInUser.Role == 'FACULTY'  || loggedInUser.Role == 'ADMIN')">
+                    <i class="icon custom" ng-class="{'ion-easel':(loggedInUser.Type == 'LM'), 'ion-ios-list':loggedInUser.Type != 'LM'}"></i>
+                    <span ng-if="loggedInUser.Type == 'LM'">Lesson Plan</span>
+                    <span ng-if="loggedInUser.Type != 'LM'">Syllabus</span>
+                </ion-item>
+                <ion-item class="item-icon-left" menu-close href="#/onlineClass" ng-if="loggedInUser.IsB2C == 'false'">
+                    <i class="icon custom ion-laptop"></i> Online Class
+                </ion-item>
+                <ion-item class="item-icon-left" menu-close href="#/marksStatistics" ng-if="loggedInUser.Type != 'LM' && (loggedInUser.Role == 'FACULTY' || loggedInUser.Role == 'ADMIN')">
+                    <i class="icon custom ion-podium"></i> Scorecard
+                </ion-item>
+                <!-- staff and librarian -->
+                <ion-item class="item-icon-left" menu-close href="#/enquiries" ng-if="loggedInUser.Role == 'STAFF'">
+                    <i class="icon custom ion-information-circled"></i> Enquiries
+                </ion-item>
+                <ion-item class="item-icon-left" menu-close href="#/expenses" ng-if="loggedInUser.Role == 'STAFF'">
+                    <i class="icon custom ion-cash"></i> Expenses
+                </ion-item>
+                <ion-item class="item-icon-left" menu-close href="#/library" ng-if="loggedInUser.Role == 'LIBRARIAN'">
+                    <i class="icon custom ion-ios-bookmarks"></i> Library
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

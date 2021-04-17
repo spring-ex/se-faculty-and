@@ -1,0 +1,27 @@
+<ion-view title="Create Assessment" class="test-page">
+    <ion-content>
+        <div class="list" style="margin-bottom: 0px;">
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    Chapter
+                </div>
+                <select ng-model="selected.chapter" ng-options="chapter.Name for chapter in chapters">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    Topic
+                </div>
+                <select ng-model="selected.topic" ng-options="topic.Name for topic in selected.chapter.Topics" ng-change="getAllCriteria()">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button button-custom loginButton" ng-click="create()">Create</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

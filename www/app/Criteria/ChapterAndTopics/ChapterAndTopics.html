@@ -1,0 +1,28 @@
+<ion-view title="{{subject.Name}}">
+    <ion-content>
+        <ion-list class="collapsible-list">
+            <div ng-repeat="chapter in chapters | orderBy: 'DisplayOrder'" ng-if="chapters.length > 0">
+                <ion-item id="item{{chapter.Id}}" class="item-stable" ng-click="toggleChapter(chapter)" ng-class="{active: isChapterShown(chapter)}">
+                    <i class="icon" ng-class="isChapterShown(chapter) ? 'ion-minus' : 'ion-plus'" style="float:left;"></i>
+                    <div style="overflow: hidden; text-overflow: ellipsis;width: 80%;float:left">
+                        &nbsp;&nbsp;{{chapter.Name}}
+                    </div>
+                    </span>
+                </ion-item>
+                <div class="topic-names item item-accordion item-icon-right" ng-show="isChapterShown(chapter)" style="padding:0px;">
+                    <ion-checkbox ng-model="topic.isSelected" class="checkbox-custom" ng-repeat="topic in chapter.Topics">
+                        <h2>{{topic.Name}}</h2>
+                    </ion-checkbox>
+                </div>
+            </div>
+            <div class="row" ng-if="chapters.length == 0">
+                <div class="col text-center">
+                    No chapters available!
+                </div>
+            </div>
+        </ion-list>
+    </ion-content>
+    <ion-footer-bar class="bar-custom button-footer-bar custom-footer" style="padding:0;border:none;">
+        <button style="border-radius:0px;" class="button button-custom loginButton" ng-click="proceed()">Proceed</button>
+    </ion-footer-bar>
+</ion-view>

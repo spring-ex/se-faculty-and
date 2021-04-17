@@ -1,0 +1,57 @@
+<ion-view title="{{student.Name | titleCase}}">
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-slides slider="slider" options="options" ion-slides-tabs slide-tabs-scrollable="true" show-pager="false" on-slide-changed="slideChanged(index)">
+            <ion-slide-page ion-slide-tab-label="{{subject.Name}}" class="loginPageTabs" ng-repeat="subject in subjects">
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="row no-padding">
+                            <div class="col no-padding">
+                                <h4>{{keywords.SubjectKeyword}} Performance</h4>
+                            </div>
+                        </div>
+                        <div class="current" ng-style="{'color':graph.color}" style="top: 125px; bottom: auto; left: 50%; transform: translateY(-50%) translateX(-50%);font-size: 20px;">{{marksStatistics.Average | number: 1}}%</div>
+                        <round-progress max="100" current="marksStatistics.Average" color="{{graph.color}}" bgcolor="#eaeaea" radius="75" stroke="25" semi="false" rounded="false" clockwise="true" responsive="false" duration="1000" animation="easeInOutCirc" animation-delay="2">
+                        </round-progress>
+                    </div>
+                </div>
+                <div class="item item-text-wrap" style="padding:0px;">
+                    <div class="list category-tip" ng-repeat="category in marksStatistics.Categories" style="margin-bottom: 0px;">
+                        <div class="item item-divider" style="padding-left:10px; padding-right:10px;height: 37.8px;" tooltips tooltip-side="'top'" tooltip-template-url="app/SkillsAndYou/ObservationPage/TooltipTemplate.html">
+                            <div style="width: 75%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;display: inline-block;">
+                                {{category.CategoryName}}
+                            </div>
+                            <span class="item-note" style="color:#222;" ng-if="category.CategoryAverage != undefined">
+                                <span>{{category.CategoryAverage | number: 1}}<span>/</span>{{category.CategoryMaxMarks | number: 1}}</span>
+                            </span>
+                            <span class="item-note" style="color:#222;" ng-if="category.CategoryAverage == undefined">
+                                <span>N/A</span>
+                            </span>
+                        </div>
+                        <div class="item" ng-repeat="test in category.Tests | orderBy: '-CreatedAt'" style="padding:0px;">
+                            <div class="row">
+                                <div class="col col-80" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    {{test.Name}}
+                                </div>
+                                <div class="col col-20 text-center" ng-click="addOrUpdateMarks(subject,category,test)">
+                                    <span class="item-note" ng-class="{'google-green':(test.Marks/test.MaxMarks)>=0.75, 'google-yellow' :((test.Marks/test.MaxMarks)<0.75 && (test.Marks/test.MaxMarks)>=0.5), 'google-red': (test.Marks/test.MaxMarks)<0.5}">
+                                        {{test.Marks | number: 1}}<span>/</span>{{test.MaxMarks | number: 1}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-if="category.Tests.length < 5">
+                            <div class="col">
+                                <button class="button button-custom loginButton" ng-click="addOrUpdateMarks(subject,category,null)">
+                                    <i class="icon ion-plus-round"></i>&nbsp;Add Observation
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-slide-page>
+        </ion-slides>
+    </ion-content>
+</ion-view>

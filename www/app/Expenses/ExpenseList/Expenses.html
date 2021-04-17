@@ -1,0 +1,45 @@
+<ion-view title="Expenses">
+    <ion-nav-buttons side="secondary">
+        <button class="button button-icon ion-plus-round" ng-click="addExpense()"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-footer">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="getAllExpenses()">
+        </ion-refresher>
+        <div class="row">
+            <div class="col text-center">
+                Choose Date Range
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button button-custom loginButton" ng-click="openStartDatePicker();">
+                    {{selected.DateRange.startDate | date: 'dd-MMM-yyyy'}}
+                </button>
+            </div>
+            <div class="col">
+                <button class="button button-custom loginButton" ng-click="openEndDatePicker();">
+                    {{selected.DateRange.endDate | date: 'dd-MMM-yyyy'}}
+                </button>
+            </div>
+        </div>
+        <ion-list can-swipe="true" ng-if="expenses.length != 0">
+            <ion-item ng-repeat="expense in expenses | orderBy: '-ExpenseDate'" class="expense-particulars">
+                <h2 style="overflow: visible;text-overflow: initial;white-space: normal;width: 80%;">{{expense.Particulars}}</h2>
+                <p>{{expense.ExpenseDate | date: 'dd-MMM-yyyy'}}</p>
+                <span style="top:27px;" class="badge badge-custom">{{expense.Amount}}</span>
+                <ion-option-button class="button-assertive" ng-click="deleteExpense(expense)">
+                    <i class="icon ion-trash-b" style="margin:auto;"></i>
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+        <div class="row no-padding" ng-if="expenses.length == 0">
+            <img class="empty_list_img" src="app/images/expenses.svg" alt="no image selected" />
+            <div class="col no-padding text-center empty_list_text">
+                No expense has been entered yet!
+            </div>
+        </div>
+    </ion-content>
+    <div class="bar bar-footer bar-custom">
+        <h1 class="title">Total Expense: {{sumOfExpenses}}</h1>
+    </div>
+</ion-view>

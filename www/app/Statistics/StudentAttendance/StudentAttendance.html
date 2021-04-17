@@ -1,0 +1,17 @@
+<ion-view title="{{student.Name | titleCase}}'s Attendance">
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="getAllAttendanceForStudent()">
+        </ion-refresher>
+        <div class="item" ng-repeat="att in attendance | orderBy: '-AttendanceDate'">
+            {{att.AttendanceDate | date: 'dd/MMM/yyyy'}}
+            <span class="item-note">
+                    <span class="balanced" ng-show="att.IsPresent == 'true'">Present</span>
+            <span class="assertive" ng-hide="att.IsPresent == 'true'">Absent</span>
+            </span>
+        </div>
+    </ion-content>
+</ion-view>

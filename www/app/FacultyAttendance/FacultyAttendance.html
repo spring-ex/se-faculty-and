@@ -1,0 +1,9 @@
+<ion-view title="Attendance">
+    <ion-content>
+        <ion-list>
+            <ion-item ng-repeat="att in attendance | orderBy: '-AttendanceDate'">
+                {{att.AttendanceDate | date: 'dd-MMM'}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

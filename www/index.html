@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="manifest" href="manifest.json">
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="lib/ionic-toast/src/ionic-toast.css" rel="stylesheet">
+    <link href="lib/ion-gallery/dist/ion-gallery.css" rel="stylesheet">
+    <link href="lib/highcharts-ng/dist/highcharts-ng.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/angular-tooltips/dist/angular-tooltips.min.css">
+    <link href="lib/ion-floating-menu/dist/ion-floating-menu.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="lib/angularjs-slider/dist/rzslider.css" />
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+    <link href="app/styles/style.css" rel="stylesheet">
+    <link href="app/styles/theme.css" rel="stylesheet">
+    <link href="app/styles/tabSlideBox.css" rel="stylesheet">
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"></script>
+    <script src="lib/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
+    <script src="lib/ionic-toast/dist/ionic-toast.bundle.min.js"></script>
+    <script src="lib/moment/min/moment.min.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="lib/ion-gallery/dist/ion-gallery.min.js"></script>
+    <script src="lib/angular-tooltips/dist/angular-tooltips.min.js"></script>
+    <script src="lib/ti-segmented-control/dist/ti-segmented-control.js"></script>
+    <script src="lib/ion-floating-menu/dist/ion-floating-menu.js" type="text/javascript"></script>
+    <script src="lib/angularjs-slider/dist/rzslider.min.js"></script>
+    <script src="lib/highcharts/highcharts.js"></script>
+    <script src="lib/highcharts/modules/data.js"></script>
+    <script src="lib/highcharts/modules/drilldown.js"></script>
+    <script src="lib/highcharts-ng/dist/highcharts-ng.js"></script>
+    <script src="lib/ionic-timepicker/dist/ionic-timepicker.bundle.min.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+    <!-- your app's js -->
+    <script src="app/app.js"></script>
+    <!-- controllers -->
+    <script type="text/javascript" src="app/Login/LoginController.js"></script>
+    <script type="text/javascript" src="app/SelectClass/SelectClassController.js"></script>
+    <script type="text/javascript" src="app/Sidemenu/SidemenuController.js"></script>
+    <script type="text/javascript" src="app/TakeAttendance/TakeAttendanceController.js"></script>
+    <script type="text/javascript" src="app/Students/StudentListController.js"></script>
+    <script type="text/javascript" src="app/EditAttendance/AttendanceList/AttendanceListController.js"></script>
+    <script type="text/javascript" src="app/EditAttendance/StudentList/StudentAttendanceListController.js"></script>
+    <script type="text/javascript" src="app/Assignments/AssignmentList/AssignmentsController.js"></script>
+    <script type="text/javascript" src="app/Assignments/AssignmentDetails/AssignmentDetailsController.js"></script>
+    <script type="text/javascript" src="app/Assignments/PublishAssignment/PublishAssignmentController.js"></script>
+    <script type="text/javascript" src="app/Tests/TestsList/TestsController.js"></script>
+    <script type="text/javascript" src="app/Tests/TestDetails/TestDetailsController.js"></script>
+    <script type="text/javascript" src="app/Statistics/Dashboard/DashboardController.js"></script>
+    <script type="text/javascript" src="app/Statistics/AttendanceStatistics/AttendanceStatisticsController.js"></script>
+    <script type="text/javascript" src="app/Statistics/MarksStatistics/MarksStatisticsController.js"></script>
+    <script type="text/javascript" src="app/Statistics/StudentStatistics/StudentStatisticsController.js"></script>
+    <script type="text/javascript" src="app/Statistics/StudentAttendance/StudentAttendanceController.js"></script>
+    <script type="text/javascript" src="app/ChangePassword/ChangePasswordController.js"></script>
+    <script type="text/javascript" src="app/Events/EventList/EventListController.js"></script>
+    <script type="text/javascript" src="app/Events/EventDetails/EventDetailsController.js"></script>
+    <script type="text/javascript" src="app/Tests/CreateTest/CreateTestController.js"></script>
+    <script type="text/javascript" src="app/StudentDetails/StudentDetailsController.js"></script>
+    <script type="text/javascript" src="app/LessonPlan/LessonPlanController.js"></script>
+    <script type="text/javascript" src="app/CalendarList/CalendarListController.js"></script>
+    <script type="text/javascript" src="app/Travel/TravelController.js"></script>
+    <script type="text/javascript" src="app/SkillsAndYou/WelcomePage/WelcomeController.js"></script>
+    <script type="text/javascript" src="app/SkillsAndYou/ObservationPage/ObservationController.js"></script>
+    <script type="text/javascript" src="app/SelectSemester/SelectSemesterController.js"></script>
+    <script type="text/javascript" src="app/TopicDetails/TopicDetailsController.js"></script>
+    <script type="text/javascript" src="app/SmartLearning/SmartLearningController.js"></script>
+    <script type="text/javascript" src="app/CreateSmartTest/CreateSmartTestController.js"></script>
+    <script type="text/javascript" src="app/Library/LibraryController.js"></script>
+    <script type="text/javascript" src="app/Criteria/EnterCriteria/EnterCriteriaController.js"></script>
+    <script type="text/javascript" src="app/Criteria/CriteriaList/CriteriaListController.js"></script>
+    <script type="text/javascript" src="app/Criteria/ChapterAndTopics/ChapterAndTopicsController.js"></script>
+    <script type="text/javascript" src="app/LearningReport/LearningReportController.js"></script>
+    <script type="text/javascript" src="app/FacultyAttendance/FacultyAttendanceController.js"></script>
+    <script type="text/javascript" src="app/Tests/LMTest/LMTestController.js"></script>
+    <script type="text/javascript" src="app/Enquiries/EnquiryList/EnquiriesController.js"></script>
+    <script type="text/javascript" src="app/Enquiries/AddEnquiry/AddEnquiryController.js"></script>
+    <script type="text/javascript" src="app/Expenses/ExpenseList/ExpensesController.js"></script>
+    <script type="text/javascript" src="app/Expenses/AddExpense/AddExpenseController.js"></script>
+    <script type="text/javascript" src="app/SkillReport/SkillReportController.js"></script>
+    <script type="text/javascript" src="app/ShowIndex/ShowIndexController.js"></script>
+    <script type="text/javascript" src="app/Questions/QuestionsController.js"></script>
+    <script type="text/javascript" src="app/SpecialAttendance/Selection/SpecialAttendanceController.js"></script>
+    <script type="text/javascript" src="app/SpecialAttendance/AttendanceList/SpecialAttendanceListController.js"></script>
+    <script type="text/javascript" src="app/SpecialAttendance/SubjectList/SpecialAttendanceSubjectsController.js"></script>
+    <script type="text/javascript" src="app/Elearning/Chapters/ChaptersController.js"></script>
+    <script type="text/javascript" src="app/WatchVideo/VideoController.js"></script>
+    <script type="text/javascript" src="app/AnalyseSkills/AnalyseSkillsController.js"></script>
+    <script type="text/javascript" src="app/OnlineClass/OnlineClassController.js"></script>
+
+    <!-- factories -->
+    <script type="text/javascript" src="app/Login/LoginFactory.js"></script>
+    <script type="text/javascript" src="app/Students/StudentListFactory.js"></script>
+    <script type="text/javascript" src="app/SelectClass/SelectClassFactory.js"></script>
+    <script type="text/javascript" src="app/TakeAttendance/TakeAttendanceFactory.js"></script>
+    <script type="text/javascript" src="app/EditAttendance/AttendanceList/AttendanceListFactory.js"></script>
+    <script type="text/javascript" src="app/Assignments/AssignmentFactory.js"></script>
+    <script type="text/javascript" src="app/Tests/TestsFactory.js"></script>
+    <script type="text/javascript" src="app/Statistics/Dashboard/DashboardFactory.js"></script>
+    <script type="text/javascript" src="app/Statistics/StudentStatistics/StudentStatisticsFactory.js"></script>
+    <script type="text/javascript" src="app/Statistics/AttendanceStatistics/AttendanceStatisticsFactory.js"></script>
+    <script type="text/javascript" src="app/Statistics/MarksStatistics/MarksStatisticsFactory.js"></script>
+    <script type="text/javascript" src="app/ChangePassword/ChangePasswordFactory.js"></script>
+    <script type="text/javascript" src="app/Events/EventsFactory.js"></script>
+    <script type="text/javascript" src="app/LessonPlan/LessonPlanFactory.js"></script>
+    <script type="text/javascript" src="app/CalendarList/CalendarFactory.js"></script>
+    <script type="text/javascript" src="app/Travel/TravelFactory.js"></script>
+    <script type="text/javascript" src="app/SkillsAndYou/WelcomePage/WelcomeFactory.js"></script>
+    <script type="text/javascript" src="app/SkillsAndYou/ObservationPage/ObservationFactory.js"></script>
+    <script type="text/javascript" src="app/SelectSemester/SelectSemesterFactory.js"></script>
+    <script type="text/javascript" src="app/TopicDetails/TopicDetailsFactory.js"></script>
+    <script type="text/javascript" src="app/SmartLearning/SmartLearningFactory.js"></script>
+    <script type="text/javascript" src="app/CreateSmartTest/CreateSmartTestFactory.js"></script>
+    <script type="text/javascript" src="app/Library/LibraryFactory.js"></script>
+    <script type="text/javascript" src="app/Criteria/CriteriaFactory.js"></script>
+    <script type="text/javascript" src="app/LearningReport/LearningReportFactory.js"></script>
+    <script type="text/javascript" src="app/FacultyAttendance/FacultyAttendanceFactory.js"></script>
+    <script type="text/javascript" src="app/Enquiries/EnquiriesFactory.js"></script>
+    <script type="text/javascript" src="app/Expenses/ExpensesFactory.js"></script>
+    <script type="text/javascript" src="app/SkillReport/SkillReportFactory.js"></script>
+    <script type="text/javascript" src="app/ShowIndex/ShowIndexFactory.js"></script>
+    <script type="text/javascript" src="app/SpecialAttendance/Selection/SpecialAttendanceFactory.js"></script>
+    <script type="text/javascript" src="app/OnlineClass/OnlineClassFactory.js"></script>
+    <!-- directives -->
+    <script type="text/javascript" src="app/Directives/StarRatingDirective.js"></script>
+    <script type="text/javascript" src="app/Directives/ImageConversionDirective.js"></script>
+    <script type="text/javascript" src="app/Directives/tabSlideBox.js"></script>
+    <script type="text/javascript" src="app/Directives/YoutubeIframeAPI.js"></script>
+    <script type="text/javascript" src="app/Directives/TitleCaseFilter.js"></script>
+    <script type="text/javascript" src="app/Directives/HtmlBindCompileDirective.js"></script>
+</head>
+
+<body ng-app="smartFacultyApp">
+    <ion-pane>
+        <ion-nav-view></ion-nav-view>
+    </ion-pane>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<ion-view title="Student Details">
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="profile-top">
+            <div class="logo-image profile-pic" style="background-image:url('app/images/man.png');margin:auto;"></div>
+            <div class="text-center profile-name">
+                {{studentDetails.Name}}
+            </div>
+            <div class="text-center" style="color:white; font-weight:bold">
+                FindInbox ID - {{studentDetails.FindInboxId}}
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-divider">
+                Personal Information
+            </div>
+            <div class="item item-icon-left item-button-right">
+                <i class="icon ion-android-calendar custom"></i> {{studentDetails.DateOfBirth | date:'dd/MMM/yyyy'}}
+                <button class="button button-custom button-small" ng-click="openDateOfBirthPicker(studentDetails.DateOfBirth)">
+                    <i class="icon ion-edit"></i>
+                </button>
+            </div>
+            <div class="item item-icon-left item-button-right" ng-if="studentDetails.PhoneNumber && loggedInUser.PackageCode != 'BASIC'">
+                <i class="icon ion-ios-telephone custom"></i> {{studentDetails.PhoneNumber}}
+                <div class="buttons">
+                    <button class="button button-balanced button-small" ng-click="call(studentDetails.PhoneNumber)">
+                        <i class="icon ion-ios-telephone"></i>
+                    </button>
+                    <button class="button button-custom button-small" ng-click="editPhoneNumber(studentDetails.PhoneNumber, 1)">
+                        <i class="icon ion-edit"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="item item-icon-left item-button-right" ng-if="studentDetails.Email && loggedInUser.PackageCode == 'BASIC'">
+                <i class="icon ion-email custom"></i> {{studentDetails.Email}}
+                <div class="buttons">
+                    <button class="button button-balanced button-small" ng-click="email(studentDetails.Email)">
+                        <i class="icon ion-paper-airplane" style="left:9px;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-divider">
+                Parents Information
+            </div>
+            <div class="item item-icon-left item-button-right" ng-if="studentDetails.FatherName != '' && studentDetails.FatherName != null">
+                <i class="icon ion-android-person custom"></i>
+                <h2>{{studentDetails.FatherName}}</h2>
+                <p>{{studentDetails.FatherPhoneNumber || 'N/A'}}</p>
+                <div class="buttons" style="top:20px">
+                    <button class="button button-balanced button-small" ng-click="call(studentDetails.FatherPhoneNumber)">
+                        <i class="icon ion-ios-telephone"></i>
+                    </button>
+                    <button class="button button-custom button-small" ng-click="editPhoneNumber(studentDetails.FatherPhoneNumber, 2)">
+                        <i class="icon ion-edit"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="item item-icon-left item-button-right" ng-if="studentDetails.MotherName != '' && studentDetails.MotherName != null">
+                <i class="icon ion-android-person custom"></i>
+                <h2>{{studentDetails.MotherName}}</h2>
+                <p>{{studentDetails.MotherPhoneNumber || 'N/A'}}</p>
+                <div class="buttons" style="top:20px">
+                    <button class="button button-balanced button-small" ng-click="call(studentDetails.MotherPhoneNumber)">
+                        <i class="icon ion-ios-telephone"></i>
+                    </button>
+                    <button class="button button-custom button-small" ng-click="editPhoneNumber(studentDetails.MotherPhoneNumber, 3)">
+                        <i class="icon ion-edit"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-top:0px;" ng-if="loggedInUser.PackageCode != 'LM' && loggedInUser.Type != 'SCHOOL'">
+            <div class="col" style="padding-top:0px;">
+                <button class="button button-custom loginButton" ng-click="resetPassword()">Reset Password</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

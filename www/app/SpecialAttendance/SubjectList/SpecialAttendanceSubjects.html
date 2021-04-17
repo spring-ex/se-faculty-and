@@ -1,0 +1,16 @@
+<ion-view title="Choose Subjects">
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-list>
+            <ion-checkbox ng-model="subject.isSelected" class="checkbox-custom" ng-true-value="true" ng-false-value="false" ng-repeat="subject in subjects">
+                <h2>{{subject.Name | titleCase}}</h2>
+            </ion-checkbox>
+        </ion-list>
+    </ion-content>
+    <ion-footer-bar class="bar-custom button-footer-bar custom-footer" style="padding:0;border:none;">
+        <button style="border-radius:0px;" class="button button-custom loginButton" ng-click="submitAttendance()">Submit Attendance</button>
+    </ion-footer-bar>
+</ion-view>

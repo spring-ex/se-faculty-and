@@ -1,0 +1,34 @@
+<ion-view title="Take Attendance">
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="secondary">
+            <button class="button button-icon ion-android-more-vertical" ng-click="openPopover($event)"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <div class="bar bar-subheader" style="padding:0px;">
+        <form id="chooseStudent-form4" class="list" style="margin-bottom:0px;width:100%;">
+            <label class="item item-input" name="students">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" name="search" placeholder="Search Student" ng-model="search">
+            </label>
+        </form>
+    </div>
+    <ion-content class="has-subheader">
+        <ion-list>
+            <div class="item item-button-right custom">
+                Attendance Date
+                <button class="button button-custom" ng-click="openDatePicker();">
+                    {{selected.attendanceDate | date: 'dd-MMM-yyyy'}}
+                </button>
+            </div>
+            <ion-checkbox ng-model="student.isPresent" class="checkbox-custom" ng-true-value="true" ng-false-value="false" ng-repeat="student in students | filter:search | orderBy: 'ClassId'" ng-change="updateStudentsCount()">
+                <h2>{{student.Name | titleCase}}</h2>
+                <p>{{student.FindInboxId}}<span ng-if="student.RollNumber">&nbsp;-&nbsp;{{student.RollNumber}}</span></p>
+            </ion-checkbox>
+        </ion-list>
+    </ion-content>
+    <ion-footer-bar class="bar-custom button-footer-bar custom-footer" style="padding:0;border:none;">
+        <button style="border-radius:0px;" class="button button-custom loginButton" ng-click="gotoSubjects()">Proceed ({{presentCount}}/{{students.length}})</button>
+    </ion-footer-bar>
+</ion-view>

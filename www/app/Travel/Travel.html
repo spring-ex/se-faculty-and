@@ -1,0 +1,77 @@
+<ion-view title="Welcome {{loggedInUser.Name}}">
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-buttons side="secondary">
+            <button class="button button-icon ion-power" ng-click="logout()"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-slides slider="slider" options="options" ion-slides-tabs slide-tabs-scrollable="true" show-pager="false">
+            <ion-slide-page ion-slide-tab-label="Pick Up" class="loginPageTabs">
+                <ion-content>
+                    <div class="row" ng-if="startPromise == null">
+                        <div class="col">
+                            <button class="button button-balanced loginButton" ng-click="startTravel()">
+                                Start Travel
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="startPromise != null">
+                        <div class="col">
+                            <button class="button button-assertive loginButton" ng-click="stopTravel()">
+                                Stop Travel
+                            </button>
+                        </div>
+                    </div>
+                    <div class="item item-input-right" ng-repeat="student in students" ng-if="(students.length > 0) && pickup">
+                        <div class="row no-padding">
+                            <div class="col col-75 no-padding" style="line-height:44px;">
+                                {{student.Name | titleCase}}
+                            </div>
+                            <div class="col col-25 text-center">
+                                <label class="toggle toggle-assertive">
+                                    <input type="checkbox" ng-model="student.HasBoarded" ng-change="studentBoardsBus(student)">
+                                    <div class="track">
+                                        <div class="handle"></div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-slide-page>
+            <ion-slide-page ion-slide-tab-label="Drop" class="loginPageTabs">
+                <ion-content>
+                    <div class="row" ng-if="endPromise == null">
+                        <div class="col">
+                            <button class="button button-balanced loginButton" ng-click="startReturnTravel()">
+                                Start Return Travel
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="endPromise != null">
+                        <div class="col">
+                            <button class="button button-assertive loginButton" ng-click="stopReturnTravel()">
+                                Stop Travel
+                            </button>
+                        </div>
+                    </div>
+                    <div class="item item-input-right" ng-repeat="student in students" ng-if="(students.length > 0)  && !pickup">
+                        <div class="row no-padding">
+                            <div class="col col-75 no-padding" style="line-height:44px;">
+                                {{student.Name | titleCase}}
+                            </div>
+                            <div class="col col-25 text-center">
+                                <label class="toggle toggle-assertive">
+                                    <input type="checkbox" ng-model="student.HasBoarded" ng-change="studentLeavesBus(student)">
+                                    <div class="track">
+                                        <div class="handle"></div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-slide-page>
+        </ion-slides>
+    </ion-content>
+</ion-view>

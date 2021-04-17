@@ -1,0 +1,15 @@
+<ion-popover-view>
+    <ion-content>
+        <div class="list" style="margin-left: 1px;">
+            <a class="item" href ng-click="openPDF(1)" ng-if="defaultPresentationURL[0].MediaURL != null">
+                Reference notes
+            </a>
+            <a class="item schoolName" href ng-click="openPDF(2)" ng-if="presentationURL[0].MediaURL != null" style="text-transform: lowercase">
+                 {{keywords.CollegeType}} notes
+            </a>
+            <a class="item" href ng-click="openPDF(3)" ng-if="topic.QuestionsMediaURL != null">
+                Question papers
+           </a>
+        </div>
+    </ion-content>
+</ion-popover-view>

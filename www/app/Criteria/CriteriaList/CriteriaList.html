@@ -1,0 +1,86 @@
+<ion-view title="{{test.Name}}({{test.MaxMarks}})" class="test-page">
+    <ion-content>
+        <ion-slides slider="slider" options="options" ion-slides-tabs slide-tabs-scrollable="true" show-pager="false" on-slide-changed="slideChanged(index)">
+            <ion-slide-page ion-slide-tab-label="Question Paper" class="loginPageTabs">
+                <div class="list" ng-if="questions.length > 0 && loggedInUser.PackageCode == 'OBE'">
+                    <div class="item item-icon-left item-button-right" ng-repeat="question in questions | orderBy: 'CreatedAt'">
+                        <span class="item-text-icon" ng-class="{'top-18':question.COName != null}">{{question.LevelName}}</span>
+                        <h2 style="white-space: normal;">
+                            <div ng-bind-html="question.Name"></div>({{question.MaxScore}})
+                        </h2>
+                        <p ng-if="question.COName != null">{{question.COName}}</p>
+                        <button class="button button-assertive button-clear" ng-class="{'top-21':question.COName != null}" ng-click="removeQuestionFromTest(question)">
+                            <i class="icon ion-trash-b"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="list" ng-if="questions.length > 0 && loggedInUser.PackageCode != 'OBE'">
+                    <div class="item item-button-right" ng-repeat="question in questions | orderBy: 'CreatedAt'">
+                        <h2 style="white-space: normal;">
+                            <div ng-bind-html="question.Name"></div>({{question.MaxScore}})
+                        </h2>
+                        <p>{{question.Tags}}</p>
+                        <button class="button button-assertive button-clear" ng-class="{'top-21':question.COName != null}" ng-click="removeQuestionFromTest(question)">
+                            <i class="icon ion-trash-b"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row" ng-if="questions.length == 0">
+                    <div class="col text-center">
+                        There are no questions under this question paper
+                    </div>
+                </div>
+            </ion-slide-page>
+            <ion-slide-page ion-slide-tab-label="Question Bank" class="loginPageTabs">
+                <ion-content>
+                    <div class="list" style="margin-bottom: 0px;">
+                        <label class="item item-input item-select">
+                            <div class="input-label custom">
+                                Chapter
+                            </div>
+                            <select ng-model="selected.chapter" ng-options="chapter.Name for chapter in chapters">
+                                <option value="">--pick one--</option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-select">
+                            <div class="input-label custom">
+                                Topic
+                            </div>
+                            <select ng-model="selected.topic" ng-options="topic.Name for topic in selected.chapter.Topics" ng-change="getAllCriteria()">
+                                <option value="">--pick one--</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="list" ng-if="criterias.length > 0 && loggedInUser.PackageCode == 'OBE'">
+                        <div class="item item-icon-left item-button-right" ng-repeat="criteria in criterias | orderBy: 'CreatedAt'">
+                            <div class="item-text-icon" ng-class="{'top-18':criteria.Name.length > 36}">{{criteria.LevelName}}</div>
+                            <h2 style="white-space: normal;">
+                                <div ng-bind-html="question.Name"></div>
+                            </h2>
+                            <p>{{criteria.Tags}}</p>
+                            <button ng-if="!criteria.isAlreadyPresent" class="button button-custom button-clear" style="top:10px;" ng-click="openModal(criteria)">
+                                <i class="icon ion-plus-round"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="list" ng-if="criterias.length > 0 && loggedInUser.PackageCode != 'OBE'">
+                        <div class="item item-button-right" ng-repeat="criteria in criterias | orderBy: 'CreatedAt'">
+                            <h2 style="white-space: normal;">
+                                <div ng-bind-html="criteria.Name"></div>
+                            </h2>
+                            <p>{{criteria.Tags}}</p>
+                            <button ng-if="!criteria.isAlreadyPresent" class="button button-custom button-clear" style="top:10px;" ng-click="openModal(criteria)">
+                                <i class="icon ion-plus-round"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="criterias.length == 0">
+                        <div class="col text-center">
+                            There are no questions under this topic
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-slide-page>
+        </ion-slides>
+    </ion-content>
+</ion-view>

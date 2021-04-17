@@ -1,0 +1,17 @@
+<ion-view title="What did you teach?">
+    <ion-content>
+        <ion-list class="collapsible-list">
+            <div ng-repeat="chapter in chapters | orderBy: 'DisplayOrder'">
+                <ion-item class="item-stable" ng-click="toggleChapter(chapter)" ng-class="{active: isChapterShown(chapter)}">
+                    <i class="icon" ng-class="isChapterShown(chapter) ? 'ion-minus' : 'ion-plus'"></i> &nbsp; {{chapter.Name}}
+                </ion-item>
+                <ion-checkbox class="topic-names checkbox-custom item-accordion" ng-model="topic.isChecked" ng-show="isChapterShown(chapter)" ng-true-value="true" ng-false-value="false" ng-repeat="topic in chapter.Topics">
+                    {{topic.Name}}
+                </ion-checkbox>
+            </div>
+        </ion-list>
+    </ion-content>
+    <ion-footer-bar class="bar-custom button-footer-bar smart-test-footer custom-footer" style="padding:0;border:none;">
+        <button style="border-radius:0px;" class="button button-custom loginButton" ng-click="submit()">Submit</button>
+    </ion-footer-bar>
+</ion-view>

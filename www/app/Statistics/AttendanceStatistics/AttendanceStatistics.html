@@ -1,0 +1,41 @@
+<ion-view title="{{keywords.SubjectKeyword}} Attendance">
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="getAttendanceStatisticsByRange()">
+        </ion-refresher>
+        <div class="list" style="margin-bottom: 0px;">
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    Choose Range
+                </div>
+                <select ng-model="selected.range" ng-options="range.Name for range in ranges" ng-change="rangeSelected(selected.range)">
+                </select>
+            </label>
+        </div>
+        <ul class="list" style="padding-top: 0px;">
+            <form id="chooseStudent-form4" class="list" style="margin-bottom:0px;width:100%;">
+                <label class="item item-input" name="students">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input type="search" name="search" placeholder="Search Student" ng-model="search">
+                </label>
+            </form>
+            <a href ng-click="studentSelected(student)" class="item marksItem item-icon-right" ng-repeat="student in attendanceStats.Students | filter:search | orderBy: 'Name'">
+                <div class="row no-padding">
+                    <div class="col col-60 no-padding">
+                        <h2>{{student.Name | titleCase}}</h2>
+                        <p>{{student.FindInboxId}}</p>
+                    </div>
+                    <div class="col no-padding text-center">
+                        <span style="line-height: 41.2px;" ng-class="{'google-green':(student.TotalPresent / attendanceStats.TotalClasses)>=0.75, 'google-yellow' :((student.TotalPresent / attendanceStats.TotalClasses)<0.75 && (student.TotalPresent / attendanceStats.TotalClasses)>=0.5), 'google-red': (student.TotalPresent / attendanceStats.TotalClasses)<0.5}">
+                            {{(student.TotalPresent / attendanceStats.TotalClasses) * 100 | number: 1}}%
+                        </span>
+                    </div>
+                </div>
+                <i class="icon ion-chevron-right custom"></i>
+            </a>
+        </ul>
+    </ion-content>
+</ion-view>

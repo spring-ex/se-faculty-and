@@ -1,0 +1,51 @@
+<ion-view title="Select">
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="getAllCourses()">
+        </ion-refresher>
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    {{keywords.CourseKeyword}}
+                </div>
+                <select ng-model="selected.course" ng-options="course.Name for course in courses" ng-change="courseSelected(selected.course)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    {{keywords.BranchKeyword}}
+                </div>
+                <select ng-model="selected.branch" ng-options="branch.Name for branch in branches" ng-change="branchSelected(selected.branch)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select" ng-if="loggedInUser.Type == 'COLLEGE'">
+                <div class="input-label custom">
+                    {{keywords.SemesterKeyword}}
+                </div>
+                <select ng-model="selected.semester" ng-options="semester.SemesterNumber for semester in semesters"  ng-change="getAllSubjects(selected.semester)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select" ng-if="from == 'elearning'">
+                <div class="input-label custom">
+                    Subjects
+                </div>
+                <select ng-model="selected.subject" ng-options="subject.Name for subject in subjects"  ng-change="subjectSelected(selected.subject)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button button-custom loginButton" ng-click="getAllStudents()">
+                    Proceed&nbsp;<i class="icon ion-arrow-right-c"></i>
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

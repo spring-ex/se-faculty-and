@@ -1,0 +1,75 @@
+<ion-view title="Create Assessment">
+    <ion-content>
+        <div class="list" style="margin-bottom: 0px;">
+            <label class="item item-input item-select" ng-if="loggedInUser.PackageCode != 'SMART' && loggedInUser.PackageCode != 'BASIC'">
+                <div class="input-label custom">
+                    Choose
+                </div>
+                <select ng-model="newTest.TestCategoryId" ng-options="category.Id as category.Name for category in categories" ng-change="subjectSelected(selected.subject)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-stacked-label" ng-if="loggedInUser.PackageCode != 'LM'">
+                <span class="input-label custom">Assessment Name*</span>
+                <input type="text" placeholder="Assessment Name*" ng-model="newTest.Name">
+            </label>
+            <label class="item item-input item-select" ng-if="loggedInUser.PackageCode == 'LM'">
+                <div class="input-label custom">
+                    Assessment
+                </div>
+                <select ng-model="newTest.Name" ng-options="assessment as assessment for assessment in assessments">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Max Score*</span>
+                <input type="number" placeholder="Max Score*" ng-model="newTest.MaxMarks">
+            </label>
+            <div class="item item-button-right custom">
+                Assessment Date*
+                <button class="button button-custom" ng-click="openDatePicker()">
+                    {{newTest.TestDate | date: 'dd-MMM-yyyy'}}
+                </button>
+            </div>
+            <div class="item item-input-right" ng-if="loggedInUser.Type == 'OBE'">
+                <div class="row no-padding">
+                    <div class="col col-75 no-padding custom" style="line-height:44px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                        Final Exam
+                    </div>
+                    <div class="col col-25 text-center">
+                        <label class="toggle toggle-custom">
+                            <input type="checkbox" ng-model="newTest.IsFinal">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="item item-divider">
+                Enter Score or Mark Absent
+            </div>
+            <div class="item item-input-right" ng-repeat="student in students">
+                <div class="row no-padding">
+                    <div class="col col-50 no-padding" style="line-height:44px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                        {{student.Name | titleCase}}
+                    </div>
+                    <div class="col col-25">
+                        <input type="number" ng-model="student.Marks" class="student-marks" ng-hide="student.IsAbsent" ng-change="isMarksMoreThanMaxMarks(student, $index)">
+                    </div>
+                    <div class="col col-25 text-center">
+                        <label class="toggle toggle-assertive">
+                            <input type="checkbox" ng-model="student.IsAbsent">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar class="bar-custom button-footer-bar custom-footer" style="padding:0;border:none;">
+        <button style="border-radius:0px;" class="button button-custom loginButton" ng-click="addTest()">Create</button>
+    </ion-footer-bar>
+</ion-view>

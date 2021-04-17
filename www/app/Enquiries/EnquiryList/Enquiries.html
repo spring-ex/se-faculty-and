@@ -1,0 +1,51 @@
+<ion-view>
+    <ion-nav-title>Enquiries ({{enquiries.length}})</ion-nav-title>
+    <ion-nav-buttons side="secondary">
+        <button class="button button-icon ion-power" ng-click="logout()"></button>
+        <button ng-if="loggedInUser.PackageCode == 'LM'" class="button button-icon ion-funnel" ng-click="openPopover($event)"></button>
+    </ion-nav-buttons>
+    <ion-header-bar class="bar-light bar-subheader" style="padding: 0px;">
+        <form id="chooseStudent-form4" class="list" style="margin-bottom:0px;width:100%;">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" name="search" placeholder="Search" ng-model="search">
+            </label>
+        </form>
+    </ion-header-bar>
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="getAllEnquiries()">
+        </ion-refresher>
+        <ion-list can-swipe="true" ng-if="enquiries.length != 0">
+            <ion-item ng-repeat="enquiry in enquiries | orderBy: '-CreatedAt' | filter: search">
+                <div class="item-checkbox">
+                    <label class="checkbox checkbox-custom checkbox-square">
+                        <input type="checkbox" class="checkbox-custom" ng-model="enquiry.isChecked" ng-true-value="true" ng-false-value="false">
+                    </label>
+                    <h2>{{enquiry.Name | titleCase}}</h2>
+                    <p>{{enquiry.BranchName}} | {{enquiry.FollowUpDate | date:'dd/MM/yyyy'}}</p>
+                    <p ng-if="enquiry.UniqueId != null || enquiry.UniqueId != ''">{{enquiry.UniqueId}}</p>
+                    <span style="top:27px;" class="badge" ng-class="{'badge-energized': enquiry.LikelyToJoin == 'Maybe', 'badge-balanced': enquiry.LikelyToJoin == 'Yes', 'badge-assertive': enquiry.LikelyToJoin == 'No'}">{{enquiry.LikelyToJoin}}</span>
+                </div>
+                <ion-option-button class="button-custom" ng-click="call(enquiry)">
+                    <i class="icon ion-ios-telephone" style="margin:auto"></i>
+                </ion-option-button>
+                <ion-option-button class="button-balanced" ng-click="edit(enquiry)">
+                    <i class="icon ion-edit" style="margin:auto"></i>
+                </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="delete(enquiry)">
+                    <i class="icon ion-trash-b" style="margin:auto"></i>
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+        <div class="row no-padding" ng-if="enquiries.length == 0">
+            <img class="empty_list_img" src="app/images/enquiry.svg" alt="no image selected" />
+            <div class="col no-padding text-center empty_list_text">
+                No enquiry has been entered yet!
+            </div>
+        </div>
+    </ion-content>
+    <ion-floating-menu menu-color="#4a79c9" menu-icon="ion-plus-round" menu-open-color="#4a79c9">
+        <ion-floating-item button-color="#4a79c9" icon="ion-plus-round" text="Add Enquiry" click="addEnquiry()"></ion-floating-item>
+        <ion-floating-item ng-if="enquiries.length != 0" button-color="#4a79c9" icon="ion-paper-airplane" text="Send SMS" click="sendSMS()"></ion-floating-item>
+    </ion-floating-menu>
+</ion-view>

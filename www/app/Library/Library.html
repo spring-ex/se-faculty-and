@@ -1,0 +1,49 @@
+<ion-view title="Library">
+    <ion-nav-buttons side="secondary">
+        <button class="button button-icon ion-power" ng-click="logout()"></button>
+    </ion-nav-buttons>
+    <ion-content class="library">
+        <ion-slides slider="slider" options="options" ion-slides-tabs slide-tabs-scrollable="true" show-pager="false" on-slide-changed="slideChanged(index)">
+            <ion-slide-page ion-slide-tab-label="Available">
+                <form id="chooseBook-form4" class="list" style="margin-bottom:0px;width:100%;">
+                    <label class="item item-input">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="search" name="search" placeholder="Title/Author/ISBN" ng-model="search">
+                    </label>
+                </form>
+                <div class="list" style="margin-left: 1px;" ng-if="books.length > 0">
+                    <a class="item item-icon-right" href ng-click="bookSelected(book)" ng-repeat="book in books | filter:search">
+                        <h2>{{book.Name}}</h2>
+                        <p>{{book.Author}} <span ng-if="book.ISBN != null">| {{book.ISBN}}</span></p>
+                        <i class="icon ion-chevron-right custom"></i>
+                    </a>
+                </div>
+                <div class="row" ng-if="books.length == 0">
+                    <div class="col text-center">
+                        No books to issue
+                    </div>
+                </div>
+            </ion-slide-page>
+            <ion-slide-page ion-slide-tab-label="Borrowed">
+                <form id="chooseBook-form5" class="list" style="margin-bottom:0px;width:100%;">
+                    <label class="item item-input">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="search" name="search" placeholder="Title/Student Name/Roll Number" ng-model="search">
+                    </label>
+                </form>
+                <div class="list" style="margin-left: 1px;" ng-if="borrowedBooks.length > 0">
+                    <a class="item item-icon-right" href ng-click="borrowedBookSelected(book)" ng-repeat="book in borrowedBooks | filter:search">
+                        <h2>{{book.Name}}</h2>
+                        <p>{{book.StudentName}}&nbsp;|&nbsp;{{book.RollNumber}}&nbsp;|&nbsp;{{book.ReturnDate | date: 'dd/MMM/yy'}}</p>
+                        <i class="icon ion-chevron-right custom"></i>
+                    </a>
+                </div>
+                <div class="row" ng-if="borrowedBooks.length == 0">
+                    <div class="col text-center">
+                        No books were borrowed
+                    </div>
+                </div>
+            </ion-slide-page>
+        </ion-slides>
+    </ion-content>
+</ion-view>

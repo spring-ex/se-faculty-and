@@ -1,0 +1,32 @@
+<ion-modal-view>
+    <div class="bar bar-header bar-custom">
+        <h1 class="title">Issue Book</h1>
+        <button class="button button-clear icon ion-close-round smallButtonIcon" ng-click="closeModal()"></button>
+    </div>
+    <ion-content class="has-header">
+        <div class="list" style="margin-bottom:0px">
+            <div class="item item-button-right custom">
+                Return Date*
+                <button class="button button-custom" ng-click="openDatePicker()">
+                    {{selected.returnDate | date: 'dd-MMM-yyyy'}}
+                </button>
+            </div>
+            <label class="item item-input item-floating-label">
+                <span class="input-label custom">Register Number(USN)</span>
+                <input type="text" placeholder="Register Number(USN)" ng-model="entered.rollNumber">
+            </label>
+        </div>
+        <div class="row" ng-if="errorMessage">
+            <div class="col">
+                {{errorMessage}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button button-custom loginButton" ng-click="searchStudent()">
+                    Search Student
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

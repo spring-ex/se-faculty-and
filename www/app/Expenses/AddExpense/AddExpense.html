@@ -1,0 +1,25 @@
+<ion-view title="Add Expense">
+    <ion-content>
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Reason of expense</span>
+                <input type="text" placeholder="Reason of expense" ng-model="newExpense.Particulars">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Amount</span>
+                <input type="number" placeholder="Amount" ng-model="newExpense.Amount">
+            </label>
+            <div class="item item-button-right custom">
+                Expense Date
+                <button class="button button-custom" ng-click="openDatePicker();">
+                    {{newExpense.ExpenseDate | date: 'dd-MMM-yyyy'}}
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button button-custom loginButton" ng-click="addExpense()">Add</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

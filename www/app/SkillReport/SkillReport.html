@@ -1,0 +1,52 @@
+<ion-view title="{{skill.Name}}">
+    <ion-content class="report-page">
+        <ion-slides slider="slider" options="options" ion-slides-tabs slide-tabs-scrollable="true" show-pager="false" on-slide-changed="slideChanged(index)">
+            <ion-slide-page ion-slide-tab-label="Topics to Re-Teach" class="loginPageTabs">
+                <ion-content>
+                    <ion-list class="collapsible-list">
+                        <div ng-repeat="chapter in chaptersToShow | orderBy: 'DisplayOrder'" ng-if="chapter.ChapterAverage != null">
+                            <ion-item class="item-stable" ng-click="toggleChapter(chapter)" ng-class="{active: isChapterShown(chapter)}">
+                                <i class="icon" ng-class="isChapterShown(chapter) ? 'ion-minus' : 'ion-plus'" style="float:left;"></i>
+                                <div style="overflow: hidden; text-overflow: ellipsis;width: 80%;float:left;">
+                                    &nbsp;&nbsp;{{chapter.Name}}
+                                </div>
+                            </ion-item>
+                            <div class="topic-names item item-accordion item-icon-right" ng-show="isChapterShown(chapter)" ng-repeat="topic in chapter.Topics" style="padding:10px 16px;" ng-if="(topic.TopicAverage<75 && topic.TopicAverage != null)">
+                                <div class="row no-padding">
+                                    <div class="col no-padding" style="white-space: normal;">
+                                        {{topic.Name}}
+                                    </div>
+                                    <div class="col no-padding col-20 text-center" ng-if="topic.IsCompleted">
+                                        <span class="item-note scorecard-note" ng-class="{'google-green':topic.TopicAverage>=75, 'google-yellow' :(topic.TopicAverage<75 && topic.TopicAverage>=50), 'google-red': topic.TopicAverage<50}">
+                                            {{topic.TopicAverage | number: 1}} %
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ion-list>
+                </ion-content>
+            </ion-slide-page>
+            <ion-slide-page ion-slide-tab-label="Students to Focus" class="loginPageTabs">
+                <ion-content>
+                    <div class="item marksItem" ng-repeat="student in students | orderBy: 'Marks'">
+                        <div class="row no-padding">
+                            <div class="col col-80 no-padding" style="overflow: hidden;">
+                                <h2>{{student.Name | titleCase}}</h2>
+                                <p>{{student.FindInboxId}}</p>
+                            </div>
+                            <div class="col no-padding text-center">
+                                <span ng-if="student.Marks != 'Ab'" style="line-height: 41.2px;" ng-class="{'google-green':(student.Marks)>=75, 'google-yellow' :((student.Marks)<75 && (student.Marks)>=50), 'google-red': (student.Marks)<50}">
+                                    {{student.Marks | number: 1}}%
+                                </span>
+                                <span class="google-red" style="line-height: 41.2px;" ng-if="student.Marks == 'Ab'">
+                                    {{student.Marks}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </ion-content>
+            </ion-slide-page>
+        </ion-slides>
+    </ion-content>
+</ion-view>

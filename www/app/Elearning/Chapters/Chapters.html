@@ -1,0 +1,29 @@
+<ion-view title="{{subject.Name}}">
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="getLessonPlan()">
+        </ion-refresher>
+        <ion-list class="collapsible-list">
+            <div class="row" ng-if="chapters.length == 0">
+                <div class="col text-center">
+                    No chapters added yet!
+                </div>
+            </div>
+            <div ng-repeat="chapter in chapters | orderBy: 'DisplayOrder'">
+                <ion-item id="item{{chapter.Id}}" class="item-stable" ng-click="toggleChapter(chapter)" ng-class="{active: isChapterShown(chapter)}">
+                    <i class="icon" ng-class="isChapterShown(chapter) ? 'ion-minus' : 'ion-plus'" style="float:left;"></i> &nbsp;&nbsp;
+                    <div style="width: 85%; float: left; overflow: hidden; text-overflow: ellipsis;padding-left: 10px;" ng-bind-html="chapter.Name">
+                    </div>
+                </ion-item>
+                <a class="topic-names item item-accordion item-icon-right" ng-show="isChapterShown(chapter)" ng-repeat="topic in chapter.Topics" ng-click="topicSelected(topic, chapter, $parent.$parent.$index)" ng-if="loggedInUser.PackageCode != 'LM'" style="padding:10px 16px;">
+                    <div style="width: 85%; float: left; white-space:normal;" ng-bind-html="topic.Name">
+                    </div>
+                    <i class="icon ion-chevron-right custom" style="font-size:25px;"></i>
+                </a>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

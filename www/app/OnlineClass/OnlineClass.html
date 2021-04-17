@@ -1,0 +1,44 @@
+<ion-view title="Online Class">
+    <ion-content>
+        <div class="list" style="margin-bottom: 0;">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Meeting URL</span>
+                <input type="text" placeholder="Meeting URL" ng-model="class.MeetingURL">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Meeting Password</span>
+                <input type="text" placeholder="Meeting Password" ng-model="class.MeetingCredentials">
+            </label>
+            <div class="item item-button-right custom">
+                Select Time
+                <button class="button button-custom" ng-click="openTimePicker()">
+                    {{selected.time | date: 'hh:mm'}}
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button button-custom" style="width: 100%;" ng-click="clearDetails()">
+                    Clear Details
+                </button>
+            </div>
+            <div class="col">
+                <button class="button button-custom" style="width: 100%;" ng-click="updateMeetingURL()">
+                    Save Details
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button button-custom" style="width: 100%;" ng-click="startClass()" ng-disabled="class.MeetingURL == null || class.MeetingURL == ''">
+                    Start Class
+                </button>
+            </div>
+            <div class="col">
+                <button class="button button-custom" style="width: 100%;" ng-click="sendReminder()">
+                    Send Reminder
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

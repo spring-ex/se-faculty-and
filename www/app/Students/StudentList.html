@@ -1,0 +1,28 @@
+<ion-view title="Select Student">
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="secondary">
+            <button class="button button-icon ion-android-arrow-dropdown" ng-if="classes.length > 1" ng-click="openPopover($event)"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-header-bar class="bar-light bar-subheader" style="padding: 0px;">
+        <form id="chooseStudent-form4" class="list" style="margin-bottom:0px;width:100%;">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" name="search" placeholder="Search" ng-model="search">
+            </label>
+        </form>
+    </ion-header-bar>
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="getAllStudents()">
+        </ion-refresher>
+        <div class="list">
+            <a class="item item-icon-right" href ng-repeat="student in students | filter:search" ng-click="studentSelected(student)">
+                <h2>{{student.Name | titleCase}}</h2>
+                <p>{{student.FindInboxId}}</p>
+                <i class="icon ion-chevron-right custom"></i>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

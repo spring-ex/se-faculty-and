@@ -1,0 +1,14 @@
+<ion-view title="Edit Attendance - {{student.Name | titleCase}}">
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="getAllAttendanceForStudent()">
+        </ion-refresher>
+        <ion-checkbox ng-model="att.IsPresent" class="checkbox-custom" ng-change="attendanceChange(att)" ng-true-value="true" ng-false-value="false" ng-repeat="att in attendance | orderBy: '-AttendanceDate'">
+            <h2>{{att.AttendanceDate | date: 'dd/MMM/yyyy'}}</h2>
+        </ion-checkbox>
+        <div class="row">
+            <div class="col text-center">
+                <h4 class="custom">Attendance ({{totalPresent}}/{{attendance.length}})</h4>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

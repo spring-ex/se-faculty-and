@@ -1,0 +1,37 @@
+<ion-view title="{{subject.Name}}">
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="getLessonPlan()">
+        </ion-refresher>
+        <ion-list class="collapsible-list">
+            <div class="row" ng-if="chapters.length == 0">
+                <div class="col text-center">
+                    No chapters added yet!
+                </div>
+            </div>
+            <div ng-repeat="chapter in chapters | orderBy: 'DisplayOrder'">
+                <ion-item id="item{{chapter.Id}}" class="item-stable" ng-click="toggleChapter(chapter)" ng-class="{active: isChapterShown(chapter)}">
+                    <i class="icon" ng-class="isChapterShown(chapter) ? 'ion-minus' : 'ion-plus'" style="float:left;"></i> &nbsp;&nbsp;
+                    <div style="width: 85%; float: left; overflow: hidden; text-overflow: ellipsis;padding-left: 10px;" ng-bind-html="chapter.Name">
+                    </div>
+                    <span style="float:right;" ng-if="loggedInUser.PackageCode == 'LM'">
+                        {{chapter.ChapterAttendance}}
+                    </span>
+                </ion-item>
+                <ion-item class="topic-names item item-accordion" ng-show="isChapterShown(chapter)" ng-if="loggedInUser.PackageCode != 'LM'" ng-model="topic.TopicAttendance" ng-repeat="topic in chapter.Topics">
+                    <div class="checkbox checkbox-custom checkbox-unique platform-android" style="float:left">
+                        <input type="checkbox" ng-model="topic.TopicAttendance" ng-true-value="1" ng-false-value="null" ng-change="updateTopicAttendance(topic, chapter)">
+                    </div>
+                    <div style="width: 65%; float: left; white-space:normal;" ng-bind-html="topic.Name">
+                    </div>
+                </ion-item>
+                <div class="topic-names item item-accordion" ng-show="isChapterShown(chapter)" ng-repeat="topic in chapter.Topics" ng-if="loggedInUser.PackageCode == 'LM'" style="padding:10px 16px;">
+                    <div style="width: 85%; float: left; overflow: hidden; text-overflow: ellipsis;" ng-bind-html="topic.Name">
+                    </div>
+                    <span style="float:right;">
+                        {{topic.TopicAttendance}}
+                    </span>
+                </div>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,110 @@
+<ion-view title="Welcome {{name}}">
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-buttons side="secondary">
+            <button class="button button-icon ion-power" ng-click="logout()"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="getAllSubjectsForUser()">
+        </ion-refresher>
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    {{keywords.SubjectKeyword}}
+                </div>
+                <select ng-model="selected.subject" ng-options="subject.Name for subject in subjects" ng-change="subjectSelected(selected.subject)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    {{keywords.ClassKeyword}}
+                </div>
+                <select ng-model="selected.class" ng-options="class.Name for class in classes" ng-change="classSelected(selected.class)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button button-custom loginButton" ng-click="enterClass()">
+                    Enter Classroom&nbsp;<i class="icon ion-arrow-right-c"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card" ng-if="loggedInUser.IsB2C == 'false'">
+            <div class="item item-divider">
+                Choose one
+            </div>
+            <div class="item" style="padding:0px;">
+                <div class="row">
+                    <div class="category-item text-center" ng-click="studentsClicked('students')">
+                        <img src="app/images/students.png" alt="" class="category-image">
+                        <div class="category-name">
+                            Students
+                        </div>
+                    </div>
+                    <div class="category-item text-center" ng-click="eventsClicked()">
+                        <img src="app/images/events.png" alt="" class="category-image">
+                        <div class="category-name">
+                            Events
+                        </div>
+                    </div>
+                    <div class="category-item text-center" ng-click="calendarClicked()">
+                        <img src="app/images/calendar.png" alt="" class="category-image">
+                        <div class="category-name">
+                            Calendar
+                        </div>
+                    </div>
+                    <div class="category-item text-center" ng-click="passwordClicked()">
+                        <img src="app/images/password.png" alt="" class="category-image">
+                        <div class="category-name">
+                            Password
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="category-item text-center" ng-click="attendanceClicked()" ng-if="loggedInUser.Type == 'SCHOOL'">
+                        <img src="app/images/checked.svg" alt="" class="category-image">
+                        <div class="category-name">
+                            Attendance
+                        </div>
+                    </div>
+                    <!-- <div class="category-item text-center" ng-click="studentsClicked('elearning')" ng-if="loggedInUser.PackageCode == 'SMART'">
+                        <img src="app/images/lecture.svg" alt="" class="category-image">
+                        <div class="category-name">
+                            E-Learning
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="card" ng-if="loggedInUser.IsB2C == 'true'">
+            <div class="item item-divider">
+                Choose one
+            </div>
+            <div class="item" style="padding:0px;">
+                <div class="row">
+                    <!-- <div class="category-item text-center" ng-click="studentsClicked('elearning')">
+                        <img src="app/images/lecture.svg" alt="" class="category-image">
+                        <div class="category-name">
+                            E-Learning
+                        </div>
+                    </div> -->
+                    <div class="category-item text-center" ng-click="eventsClicked()">
+                        <img src="app/images/events.png" alt="" class="category-image">
+                        <div class="category-name">
+                            Events
+                        </div>
+                    </div>
+                    <div class="category-item text-center" ng-click="passwordClicked()">
+                        <img src="app/images/password.png" alt="" class="category-image">
+                        <div class="category-name">
+                            Password
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

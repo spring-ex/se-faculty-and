@@ -1,0 +1,105 @@
+<ion-view title="Add/Edit Enquiry">
+    <ion-content>
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Application Form Number</span>
+                <input type="text" placeholder="Application Form Number" ng-model="newEnquiry.UniqueId">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Student Name*</span>
+                <input type="text" placeholder="Student Name" ng-model="newEnquiry.Name">
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    Gender*
+                </div>
+                <select ng-model="newEnquiry.GenderId" ng-options="gender.Id as gender.Name for gender in genders">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    {{keywords.CourseKeyword}}*
+                </div>
+                <select ng-model="newEnquiry.CourseId" ng-options="course.Id as course.Name for course in courses" ng-change="courseSelected(newEnquiry.CourseId)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    {{keywords.BranchKeyword}}*
+                </div>
+                <select ng-model="newEnquiry.BranchId" ng-options="branch.Id as branch.Name for branch in branches" ng-change="branchSelected(newEnquiry.BranchId)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    {{keywords.SemesterKeyword}}
+                </div>
+                <select ng-model="newEnquiry.SemesterId" ng-options="semester.Id as semester.SemesterNumber for semester in semesters">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <div class="item item-button-right custom">
+                Date of Birth*
+                <button class="button button-custom" ng-click="openDatePicker();">
+                    {{newEnquiry.DateOfBirth | date: 'dd-MMM-yyyy'}}
+                </button>
+            </div>
+            <div class="item" ng-if="loggedInUser.PackageCode == 'LM' || loggedInUser.Type == 'LM'">
+                <h2 class="custom">Age</h2>
+                <p>{{age.Years}}&nbsp;year(s),&nbsp;{{age.Months}}&nbsp;month(s),&nbsp;{{age.Days}}&nbsp;day(s) as of Today</p>
+                <p>{{ageAsOfJune.Years}}&nbsp;year(s),&nbsp;{{ageAsOfJune.Months}}&nbsp;month(s),&nbsp;{{ageAsOfJune.Days}}&nbsp;day(s) as of June 1st</p>
+            </div>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Father's Name*</span>
+                <input type="text" placeholder="Father's Name" ng-model="newEnquiry.FatherName">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Mother's Name</span>
+                <input type="text" placeholder="Mother's Name" ng-model="newEnquiry.MotherName">
+            </label>
+            <label class="item item-input item-stacked-label" ng-if="loggedInUser.Type == 'LM'">
+                <span class="input-label custom">Father Phone Number*</span>
+                <input type="number" placeholder="Father Phone Number" ng-model="newEnquiry.PhoneNumber">
+            </label>
+            <label class="item item-input item-stacked-label" ng-if="loggedInUser.Type == 'LM'">
+                <span class="input-label custom">Mother Phone Number</span>
+                <input type="number" placeholder="Mother Phone Number" ng-model="newEnquiry.MotherPhoneNumber">
+            </label>
+            <label class="item item-input item-stacked-label" ng-if="loggedInUser.Type != 'LM'">
+                <span class="input-label custom">Contact Number*</span>
+                <input type="number" placeholder="Contact Number" ng-model="newEnquiry.PhoneNumber">
+            </label>
+            <label class="item item-input item-stacked-label" ng-if="loggedInUser.Type != 'LM'">
+                <span class="input-label custom">Alternate Number</span>
+                <input type="number" placeholder="Alternate Number" ng-model="newEnquiry.MotherPhoneNumber">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Email</span>
+                <input type="email" placeholder="Email" ng-model="newEnquiry.Email">
+            </label>
+            <div class="item item-button-right custom">
+                FollowUp Date
+                <button class="button button-custom" ng-click="openDatePicker2();">
+                    {{newEnquiry.FollowUpDate | date: 'dd-MMM-yyyy'}}
+                </button>
+            </div>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Street/Apartment No.</span>
+                <input type="text" placeholder="Street/Apartment No." ng-model="newEnquiry.Searchterm">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Note</span>
+                <textarea placeholder="Enter Note" rows="5" ng-model="newEnquiry.Note"></textarea>
+            </label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button ng-if="!isEdit" class="button button-custom loginButton" ng-click="addEnquiry()">Add Enquiry</button>
+                <button ng-if="isEdit" class="button button-custom loginButton" ng-click="updateEnquiry()">Update Enquiry</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

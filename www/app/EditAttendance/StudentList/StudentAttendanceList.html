@@ -1,0 +1,33 @@
+<ion-view title="Students">
+    <label class="item item-input item-select" style="margin-top:44px;">
+        <div class="input-label custom">
+            Choose Range
+        </div>
+        <select ng-model="attendanceRange" ng-options="range.Name for range in ranges" ng-change="attendanceRangeChanged()">
+        </select>
+    </label>
+    <ul class="list" style="padding-top: 0px;">
+        <form id="chooseStudent-form4" class="list" style="margin-bottom:0px;width:100%;">
+            <label class="item item-input" name="students">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" name="search" placeholder="Search Student" ng-model="search">
+            </label>
+        </form>
+    </ul>
+    <ion-content class="attendance-content">
+        <a href ng-click="studentSelected(student)" class="item marksItem item-icon-right" ng-repeat="student in attendanceStatistics.Students | filter:search | orderBy: 'Name'">
+            <div class="row no-padding">
+                <div class="col col-60 no-padding" style="overflow: hidden;">
+                    <h2>{{student.Name | titleCase}}</h2>
+                    <p>{{student.FindInboxId}}</p>
+                </div>
+                <div class="col no-padding text-center">
+                    <span style="line-height: 41.2px;" ng-class="{'google-green':(student.TotalPresent / attendanceStatistics.TotalClasses)>=0.75, 'google-yellow' :((student.TotalPresent / attendanceStatistics.TotalClasses)<0.75 && (student.TotalPresent / attendanceStatistics.TotalClasses)>=0.5), 'google-red': (student.TotalPresent / attendanceStatistics.TotalClasses)<0.5}">
+                        {{(student.TotalPresent / attendanceStatistics.TotalClasses) * 100 | number: 1}}%
+                    </span>
+                </div>
+            </div>
+            <i class="icon ion-chevron-right custom"></i>
+        </a>
+    </ion-content>
+</ion-view>

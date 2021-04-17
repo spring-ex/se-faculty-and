@@ -1,0 +1,59 @@
+<ion-view title="Welcome {{loggedInUser.Name}}">
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-buttons side="secondary">
+            <button class="button button-icon ion-power" ng-click="logout()"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="list">
+            <!-- <label class="item item-input item-select">
+                <div class="input-label custom">
+                    {{keywords.CourseKeyword}}
+                </div>
+                <select ng-model="selected.courseId" ng-options="course.Id as course.Name for course in courses" ng-change="courseSelected(selected.courseId)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    {{keywords.BranchKeyword}}
+                </div>
+                <select ng-model="selected.branchId" ng-options="branch.Id as branch.Name for branch in branches" ng-change="branchSelected(selected.branchId)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label> -->
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    {{keywords.SemesterKeyword}}
+                </div>
+                <select ng-model="selected.semesterId" ng-options="semester.Id as semester.SemesterNumber for semester in semesters" ng-change="semesterSelected(selected.semesterId)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    {{keywords.ClassKeyword}}
+                </div>
+                <select ng-model="selected.classId" ng-options="class.Id as class.Name for class in classes" ng-change="classSelected(selected.classId)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    Teacher
+                </div>
+                <select ng-model="selected.student" ng-options="student.Name for student in students">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button button-custom loginButton" ng-click="enterClass()">
+                    Enter Classroom&nbsp;<i class="icon ion-arrow-right-c"></i>
+                </button>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

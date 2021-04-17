@@ -1,0 +1,54 @@
+<ion-view title="Share to Classroom">
+    <ion-content>
+        <div class="list">
+            <form name="assignmentForm">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label custom">Title (50 characters)</span>
+                    <input type="text" name="assignmentName" placeholder="Title" ng-model="newAssignment.Name">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label custom">Description (200 characters)</span>
+                    <textarea placeholder="Write Description, Add Links etc." name="assignmentDescription" rows="5" class="textArea" ng-model="newAssignment.Description"></textarea>
+                </label>
+                <label class="item item-input item-stacked-label" style="overflow:initial;">
+                    <span class="input-label custom">Add Youtube Video&nbsp;<i class="icon ion-help-circled event-help-icon" tooltips tooltip-side="'right'" tooltip-template="Step 1: Open YouTube app<br/>Step 2: Select desired video<br/>Step 3: Tap on Share button<br/>Step 4: Copy Link & paste here."></i></span>
+                    <input type="text" name="eventVideoUrl" placeholder="Youtube Video URL" ng-model="newAssignment.VideoURL">
+                </label>
+                <label class="item item-input item-stacked-label" style="overflow:initial;z-index:auto;">
+                    <span class="input-label custom">Add Document URL&nbsp;<i class="icon ion-help-circled event-help-icon" tooltips tooltip-side="'right'" tooltip-template="Step 1: Open Google Drive app<br/>Step 2: Select and open desired document<br/>Step 3: Tap on menu button on top right<br/>Step 4: Turn on Link Sharing<br/>Step 5: Copy Link & paste here."></i></span>
+                    <input type="text" name="eventDocumentUrl" placeholder="Document URL" ng-model="newAssignment.DocumentURL">
+                </label>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col custom" style="font-size:16px; padding-left:11px;">
+                Add Photos
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <button class="button button-custom" ng-click="capture(1)" style="width:100%">
+                    <i class="icon ion-camera"></i>&nbsp;Camera
+                </button>
+            </div>
+            <!-- <div class="col text-center">
+                <button class="button button-custom" ng-click="capture(2)" style="width:100%">
+                    <i class="icon ion-images"></i>&nbsp;Gallery
+                </button>
+            </div> -->
+        </div>
+        <div class="gallery-box" ng-if="newAssignment.Images.length > 0">
+            <div class="gallery-item" ng-repeat="image in newAssignment.Images">
+                <button class="button button-clear button-assertive image-delete-button" ng-click="removeImage($index)">
+                    <i class="icon ion-close-circled"></i>
+                </button>
+                <img ng-src="{{image.src}}" alt="No image detected" style="position: relative; top: -41px; width:100%;" ng-click="goToSlide($index)" />
+            </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar class="bar-custom button-footer-bar custom-footer" style="padding:0;border:none;">
+        <button style="border-radius:0px;" class="button button-custom loginButton" ng-click="publish()">
+            Share
+        </button>
+    </ion-footer-bar>
+</ion-view>

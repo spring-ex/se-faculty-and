@@ -1,0 +1,33 @@
+<ion-view title="Choose a subject">
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    {{keywords.BranchKeyword}}
+                </div>
+                <select ng-model="selected.branch" ng-options="branch.Name for branch in branches" ng-change="branchSelected(selected.branch)">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    {{keywords.ClassKeyword}}
+                </div>
+                <select ng-model="selected.class" ng-options="class.Name for class in classes">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button button-custom loginButton" ng-click="takeAttendance()">
+                    Take Attendance&nbsp;<i class="icon ion-arrow-right-c"></i>
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

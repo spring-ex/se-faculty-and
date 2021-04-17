@@ -1,0 +1,21 @@
+<ion-modal-view>
+    <div class="bar bar-header bar-custom">
+        <h1 class="title">Question details</h1>
+        <button class="button button-clear icon ion-close-round smallButtonIcon" ng-click="closeModal()"></button>
+    </div>
+    <ion-content class="has-header">
+        <div ng-if="currentCriteria.ImageURL != null">
+            <img class="criteria-image" ng-src="{{currentCriteria.ImageURL}}" alt="Browser doesnt support images">
+        </div>
+        <div ng-if="currentCriteria.Name != null" class="row" style="border-top:1px solid  #dadada">
+            <div class="col" style="padding-left:11px; font-weight: 500;" ng-bind-html="currentCriteria.Name"></div>
+        </div>
+        <div ng-if="currentCriteria.Tags != null" class="row" style="border-top:1px solid #dadada; margin:0;padding-top:5px;">
+            <div class="col" style="padding-left:11px;">
+                <div class="tag-display" ng-repeat="tag in tagsToDisplay">
+                    {{tag}}
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

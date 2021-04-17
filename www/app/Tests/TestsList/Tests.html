@@ -1,0 +1,19 @@
+<ion-view title="Assessments" class="test-page">
+    <ion-nav-buttons side="secondary">
+        <a class="button button-icon ion-plus-round" href ng-click="addTest()"></a>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list" ng-if="tests.length > 0">
+            <a class="item item-icon-right" href ng-repeat="test in tests | orderBy: '-CreatedAt'" ng-click="testSelected(test)">
+                <h2>{{test.Name}} <span ng-if="test.TestCategoryName != null">- {{test.TestCategoryName}}</span></h2>
+                <i class="icon ion-chevron-right custom"></i>
+            </a>
+        </div>
+        <div class="row no-padding" ng-if="tests.length == 0">
+            <img class="empty_list_img" src="app/images/tests.svg" alt="no image selected" />
+            <div class="col no-padding text-center empty_list_text">
+                Nothing has been shared yet!
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

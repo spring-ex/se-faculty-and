@@ -1,0 +1,48 @@
+<ion-modal-view>
+    <div class="bar bar-header bar-custom">
+        <h1 class="title">Add question to assessment</h1>
+        <button class="button button-clear icon ion-close-round smallButtonIcon" ng-click="closeModal()"></button>
+    </div>
+    <ion-content class="has-header">
+        <div ng-if="currentCriteria.ImageURL != null">
+            <img class="criteria-image" ng-src="{{currentCriteria.ImageURL}}" alt="Browser doesnt support images">
+        </div>
+        <div ng-if="currentCriteria.Name != null" class="row" style="border-top:1px solid  #dadada">
+            <div class="col" style="padding-left:11px; font-weight: 500;" ng-bind-html="currentCriteria.Name"></div>
+        </div>
+        <div ng-if="currentCriteria.Tags != null" class="row" style="border-top:1px solid #dadada; margin:0;padding-top:5px;">
+            <div class="col" style="padding-left:11px;">
+                <div class="tag-display" ng-repeat="tag in tagsToDisplay">
+                    {{tag}}
+                </div>
+            </div>
+        </div>
+        <div class="list" style="margin-bottom: 0px;">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Max Score</span>
+                <input type="number" placeholder="Max Score" ng-model="newQuestion.MaxScore">
+            </label>
+            <label class="item item-input item-select" ng-if="loggedInUser.Type == 'OBE'">
+                <div class="input-label custom">
+                    Course Outcome
+                </div>
+                <select ng-model="newQuestion.COId" ng-options="co.Id as co.Name for co in cos">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select" ng-if="loggedInUser.Type == 'OBE'">
+                <div class="input-label custom">
+                    Blooms Level
+                </div>
+                <select ng-model="newQuestion.BTId" ng-options="bt.Id as bt.Name for bt in bts">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button loginButton button-custom" ng-click="addQuestion()">Add Question</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

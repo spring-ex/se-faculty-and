@@ -1,0 +1,66 @@
+<ion-view title="Create Question">
+    <ion-content>
+        <div class="list" style="margin:0px;">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Description</span>
+                <textarea placeholder="Describe the criteria" name="criteriaName" rows="5" class="textArea" ng-model="newCriteria.Name"></textarea>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label custom">Max Score</span>
+                <input type="number" name="maxscore" placeholder="Max Score" ng-model="newCriteria.MaxScore">
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    Assessment
+                </div>
+                <select ng-model="selected.test" ng-options="test.Name for test in tests">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    Course Outcome
+                </div>
+                <select ng-model="selected.co" ng-options="co.Name for co in cos">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label custom">
+                    Blooms Level
+                </div>
+                <select ng-model="selected.bt" ng-options="bt.Name for bt in bts">
+                    <option value="">--pick one--</option>
+                </select>
+            </label>
+        </div>
+        <div class="row">
+            <div class="col custom" style="font-size:16px; padding-left:11px;">
+                Add Photos
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <button class="button button-custom" ng-click="capture(1)" style="width:100%">
+                    <i class="icon ion-camera"></i>&nbsp;Camera
+                </button>
+            </div>
+            <div class="col text-center">
+                <button class="button button-custom" ng-click="capture(2)" style="width:100%">
+                    <i class="icon ion-images"></i>&nbsp;Gallery
+                </button>
+            </div>
+        </div>
+        <div class="gallery-box" ng-if="newCriteria.Images.length > 0">
+            <div class="gallery-item" ng-repeat="image in newCriteria.Images">
+                <button class="button button-clear button-assertive image-delete-button" ng-click="removeImage($index)">
+                    <i class="icon ion-close-circled"></i>
+                </button>
+                <img ng-src="{{image.src}}" alt="No image detected" style="position: relative; top: -41px; width:100%;" ng-click="goToSlide($index)" />
+            </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar class="bar-custom button-footer-bar custom-footer" style="padding:0;border:none;">
+        <button style="border-radius:0px;" class="button button-custom loginButton" ng-click="createCriteria()">Create</button>
+    </ion-footer-bar>
+</ion-view>f

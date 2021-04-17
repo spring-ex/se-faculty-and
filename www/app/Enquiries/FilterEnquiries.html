@@ -1,0 +1,12 @@
+<ion-popover-view style="height: 228px;">
+    <ion-content>
+        <ion-checkbox ng-model="branch.isSelected" class="checkbox-custom" ng-true-value="true" ng-false-value="false" ng-repeat="branch in branches">
+            <h2>{{branch.Name}}</h2>
+        </ion-checkbox>
+        <div class="row">
+            <div class="col text-center">
+                <button class="button button-custom button-small button-block" style="margin: 0;" ng-click="searchEnquiry()">Filter</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-popover-view>
