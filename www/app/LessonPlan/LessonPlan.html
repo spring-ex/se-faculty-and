@@ -23,6 +23,9 @@
                     </div>
                     <div style="width: 65%; float: left; white-space:normal;" ng-bind-html="topic.Name">
                     </div>
+                    <div class="icon" style="float:right;font-size: 85%;right: 55px;" ng-click="topicSelected(topic, chapter, $parent.$parent.$parent.$index)">
+                        <i class="icon ion-chevron-right custom"></i>
+                    </div>
                 </ion-item>
                 <div class="topic-names item item-accordion" ng-show="isChapterShown(chapter)" ng-repeat="topic in chapter.Topics" ng-if="loggedInUser.PackageCode == 'LM'" style="padding:10px 16px;">
                     <div style="width: 85%; float: left; overflow: hidden; text-overflow: ellipsis;" ng-bind-html="topic.Name">
